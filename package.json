@@ -1,0 +1,109 @@
+{
+  "name": "SkelEktron",
+  "description": "Unofficial Electron Template Application",
+  "version": "0.0.2",
+  "author": {
+    "name": "Vito Tardia / BZ Coding",
+    "email": "vito@bzcoding.com",
+    "url": "https://bzcoding.com/"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BZCoding/SkelEktron.git"
+  },
+  "main": "main.js",
+  "scripts": {
+    "test": "standard && mocha --recursive",
+    "unit": "standard && mocha test/unit --recursive",
+    "integration": "standard && mocha test/integration --recursive",
+    "coverage": "istanbul cover node_modules/.bin/_mocha -- --recursive",
+    "depcheck": "dependency-check app --entry main.js --unused --no-dev",
+    "lint": "standard",
+    "start": "electron ./app/main",
+    "clean:linux": "rimraf dist/linux",
+    "clean:osx": "rimraf dist/darwin-x64",
+    "clean:win": "rimraf dist/win",
+    "clean": "npm run clean:linux && npm run clean:win && npm run clean:osx",
+    "pack:osx": "build --platform=darwin",
+    "pack:win": "npm run pack:win64 && npm run pack:win32",
+    "pack:win32": "build --platform=win32 --arch=ia32",
+    "pack:win64": "build --platform=win32 --arch=x64",
+    "pack:linux": "npm run pack:lin64 && npm run pack:lin32",
+    "pack:lin32": "build --platform=linux --arch=ia32",
+    "pack:lin64": "build --platform=linux --arch=x64",
+    "pack": "build --platform=all --arch=x64,ia32",
+    "prebuild": "node build/target.js",
+    "postbuild": "node build/target.js --clean",
+    "prebuild:osx": "npm run prebuild",
+    "postbuild:osx": "npm run postbuild",
+    "build:osx": "build --platform=darwin -d",
+    "build:win": "npm run build:win64 && npm run build:win32",
+    "build:win32": "build --platform=win32 --arch=ia32 -d",
+    "build:win64": "build --platform=win32 --arch=x64 -d",
+    "build:linux": "npm run build:lin64 && npm run build:lin32 -d",
+    "build:lin32": "build --platform=linux --arch=ia32 -d",
+    "build:lin64": "build --platform=linux --arch=x64 -d",
+    "build": "build --platform=all --arch=x64,ia32 -d",
+    "postinstall": "install-app-deps"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "after",
+      "it",
+      "before",
+      "beforeEach",
+      "afterEach",
+      "rm",
+      "cp"
+    ]
+  },
+  "pre-commit": [
+    "lint",
+    "unit"
+  ],
+  "keywords": [
+    "electron-app",
+    "electron"
+  ],
+  "build": {
+    "app-bundle-id": "skelektron",
+    "app-category-type": "public.app-category.business",
+    "osx": {
+      "title": "SkelEktron",
+      "icon-size": 120,
+      "contents": [
+        {
+          "x": 478,
+          "y": 170,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 170,
+          "type": "file"
+        }
+      ]
+    },
+    "win": {
+      "msi": false
+    }
+  },
+  "devDependencies": {
+    "async": "^1.5",
+    "chai": "^3.5",
+    "chai-as-promised": "5.3.0",
+    "dependency-check": "^2.5",
+    "electron-builder": "^3",
+    "electron-prebuilt": "^1",
+    "istanbul": "^0.4",
+    "mocha": "^2.4",
+    "pre-commit": "^1.1",
+    "rimraf": "^2.5",
+    "shelljs": "^0.7",
+    "spectron": "~3.0.0",
+    "standard": "^7"
+  }
+}
