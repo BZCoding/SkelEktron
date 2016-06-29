@@ -107,6 +107,10 @@ function initialize () {
       console.error('The browser window has just crashed')
     })
 
+    win.webContents.on('did-finish-load', () => {
+      win.webContents.send('hello')
+    })
+
     return win
   }
 
@@ -133,18 +137,25 @@ function initialize () {
         version: app.getVersion()
       })
       ipc.on('update-downloaded', (autoUpdater) => {
-        var updateNow = dialog.showMessageBox(mainWindow, {
-          type: 'question',
-          buttons: ['Yes', 'No'],
-          defaultId: 0,
-          cancelId: 1,
-          title: 'Update available',
-          message: 'There is an update available, do you want to restart and install it now?'
+        // Elegant solution: display unobtrusive notification messages
+        mainWindow.webContents.send('update-downloaded')
+        ipc.on('update-and-restart', () => {
+          autoUpdater.quitAndInstall()
         })
 
-        if (updateNow === 0) {
-          autoUpdater.quitAndInstall()
-        }
+        // Basic solution: display a message box to the user
+        // var updateNow = dialog.showMessageBox(mainWindow, {
+        //   type: 'question',
+        //   buttons: ['Yes', 'No'],
+        //   defaultId: 0,
+        //   cancelId: 1,
+        //   title: 'Update available',
+        //   message: 'There is an update available, do you want to restart and install it now?'
+        // })
+        //
+        // if (updateNow === 0) {
+        //   autoUpdater.quitAndInstall()
+        // }
       })
     } catch (e) {
       console.error(e.message)
