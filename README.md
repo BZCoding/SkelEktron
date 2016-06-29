@@ -8,9 +8,9 @@ SkelEktron was born to be a scratchpad application. A kitchen sink forked from t
 
  - A smart cross-platform logger
  - A ready-to-go auto updater
- - A printer management feature (fully supported on 64bit Mac/Linux)
  - Built-in support for [Electron Builder][electron-builder]
  - Built-in support for different _build targets_ (ie. release, debug, test, etc) with different settings
+ - A printer management feature (optional, fully supported on 64bit Mac/Linux)
 
 ### Logger
 
@@ -52,7 +52,11 @@ If the value is not set or is set to `false`, the feature is disabled.
 
 With the [printer][printer] module the application has access to the printers list and can send data directly to the chosen printer. The current implementation prints test pages in PDF or TXT format. For your specific implementations you can have a look at [the examples][printer-examples].
 
-**Please Note**: printer management has been disabled in Windows, because it's not fully supported. You can enable it and enhance it, if needed.
+**Please Note**: since very few apps would need printing ability, and it's not fully supported in Windows, printer management has been disabled by default. To enable the library:
+
+ - add the [printer][printer] in `app/package.json`,
+ - uncomment and customize `require('./lib/printer')` in `main.js`,
+ - add and customize `require('./assets/js/printers.js')` to your HTML views.
 
 ### Electron Builder support
 

@@ -2,7 +2,7 @@
   "name": "SkelEktron",
   "productName": "SkelEktron",
   "description": "Electron Template Desktop Application",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/BZCoding/SkelEktron",
   "author": {
     "name": "Vito Tardia / BZ Coding",
@@ -14,7 +14,6 @@
   "dependencies": {
     "electron-debug": "^1",
     "devtron": "^1.1",
-    "printer": "^0.2",
     "lodash": "^4"
   },
   "config": {

@@ -56,7 +56,8 @@ function initialize () {
   var shouldQuit = makeSingleInstance()
   if (shouldQuit) return app.quit()
 
-  require('./lib/printer')
+  // Use printer utility lib (requires printer module, see README)
+  // require('./lib/printer')
 
   function onClosed () {
     // Dereference used windows
