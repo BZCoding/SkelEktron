@@ -69,7 +69,7 @@ function initialize () {
     const win = new electron.BrowserWindow({
       'width': 1024,
       'height': 768,
-      'title': pjson.productName || 'Electron Skel',
+      'title': app.getName(),
       'webPreferences': {
         'nodeIntegration': pjson.config.nodeIntegration || true, // Disabling node integration allows to use libraries such as jQuery/React, etc
         'preload': path.resolve(path.join(__dirname, 'preload.js'))
