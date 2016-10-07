@@ -98,7 +98,7 @@ A suitable build flow can be:
 
 Although theoretically you can cross-build all platform versions of your app on a single operating system, I've found that building each release on the target OS, using VMs obviously, works best for me.
 
-I use both node v4 or v5 (v0.12 should be enough, but just in case...).
+I use both node v4, v5 and v6.5.
 
 For Windows builds I use an official [Windows 10 development VM][win10dev] from Microsoft. You just need to install Python, Node and Git.
 
@@ -116,13 +116,13 @@ You can configure custom parameters for your platform installers inside the deve
 
 ~~~ json
 "build": {
-  "app-bundle-id": "com.example.MyApp",
-  "app-category-type": "public.app-category.business",
-  "osx": {
-    "title": "My Awesome App",
+  "appId": "com.example.MyApp",
+  "productName": "MyApp",
+  "dmg": {
     "icon": "build/mount.icns",
-    "icon-size": 120,
     "background": "build/background.png",
+    "iconSize": 120,
+    "iconTextSize": 14,
     "contents": [
       {
         "x": 478,
@@ -137,7 +137,13 @@ You can configure custom parameters for your platform installers inside the deve
       }
     ]
   },
+  "mac": {
+    "category": "public.app-category.business"
+  },
   "win": {
+    "icon": "build/icon.ico"
+  },
+  "squirrelWindows": {
     "loadingGif": "build/splash.gif",
     "iconUrl": "https://url/to/icon.ico",
     "msi": false
