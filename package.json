@@ -65,7 +65,8 @@
   ],
   "keywords": [
     "electron-app",
-    "electron"
+    "electron",
+    "boilerplate"
   ],
   "build": {
     "app-bundle-id": "skelektron",
