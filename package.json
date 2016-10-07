@@ -21,7 +21,7 @@
     "depcheck": "dependency-check app --entry main.js --unused --no-dev",
     "lint": "standard",
     "start": "electron ./app/main",
-    "clean:linux": "rimraf dist/linux",
+    "clean:linux": "rimraf dist/linux* dist/*.deb dist/*.AppImage",
     "clean:osx": "rimraf dist/mac",
     "clean:win": "rimraf dist/win",
     "clean": "npm run clean:linux && npm run clean:win && npm run clean:osx",
@@ -32,7 +32,7 @@
     "prebuild": "node build/target.js",
     "build:osx": "npm run prebuild && build --mac && npm run postbuild",
     "build:win": "npm run prebuild && build --win --x64 && npm run postbuild",
-    "build:linux": "npm run prebuild && build --linux --x64 && npm run postbuild",
+    "build:linux": "npm run prebuild && build --linux deb AppImage --x64 && npm run postbuild",
     "build": "build",
     "postbuild": "node build/target.js --clean",
     "postinstall": "install-app-deps"
