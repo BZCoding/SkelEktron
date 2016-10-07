@@ -23,7 +23,7 @@
     "start": "electron ./app/main",
     "clean:linux": "rimraf dist/linux* dist/*.deb dist/*.AppImage",
     "clean:osx": "rimraf dist/mac",
-    "clean:win": "rimraf dist/win",
+    "clean:win": "rimraf dist/win*",
     "clean": "npm run clean:linux && npm run clean:win && npm run clean:osx",
     "pack:osx": "build --dir --mac",
     "pack:win": "build --dir --win --x64",
