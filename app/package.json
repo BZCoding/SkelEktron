@@ -9,6 +9,7 @@
     "email": "vito@bzcoding.com",
     "url": "https://bzcoding.com/"
   },
+  "license": "MIT",
   "main": "main.js",
   "electronVersion": "1.0.0",
   "dependencies": {

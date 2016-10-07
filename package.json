@@ -22,29 +22,19 @@
     "lint": "standard",
     "start": "electron ./app/main",
     "clean:linux": "rimraf dist/linux",
-    "clean:osx": "rimraf dist/darwin-x64",
+    "clean:osx": "rimraf dist/mac",
     "clean:win": "rimraf dist/win",
     "clean": "npm run clean:linux && npm run clean:win && npm run clean:osx",
-    "pack:osx": "build --platform=darwin",
-    "pack:win": "npm run pack:win64 && npm run pack:win32",
-    "pack:win32": "build --platform=win32 --arch=ia32",
-    "pack:win64": "build --platform=win32 --arch=x64",
-    "pack:linux": "npm run pack:lin64 && npm run pack:lin32",
-    "pack:lin32": "build --platform=linux --arch=ia32",
-    "pack:lin64": "build --platform=linux --arch=x64",
-    "pack": "build --platform=all --arch=x64,ia32",
+    "pack:osx": "build --dir --mac",
+    "pack:win": "build --dir --win --x64",
+    "pack:linux": "build --dir --linux --x64",
+    "pack": "build --dir",
     "prebuild": "node build/target.js",
+    "build:osx": "npm run prebuild && build --mac && npm run postbuild",
+    "build:win": "npm run prebuild && build --win --x64 && npm run postbuild",
+    "build:linux": "npm run prebuild && build --linux --x64 && npm run postbuild",
+    "build": "build",
     "postbuild": "node build/target.js --clean",
-    "prebuild:osx": "npm run prebuild",
-    "postbuild:osx": "npm run postbuild",
-    "build:osx": "build --platform=darwin -d",
-    "build:win": "npm run build:win64 && npm run build:win32",
-    "build:win32": "build --platform=win32 --arch=ia32 -d",
-    "build:win64": "build --platform=win32 --arch=x64 -d",
-    "build:linux": "npm run build:lin64 && npm run build:lin32 -d",
-    "build:lin32": "build --platform=linux --arch=ia32 -d",
-    "build:lin64": "build --platform=linux --arch=x64 -d",
-    "build": "build --platform=all --arch=x64,ia32 -d",
     "postinstall": "install-app-deps"
   },
   "standard": {
@@ -69,11 +59,11 @@
     "boilerplate"
   ],
   "build": {
-    "app-bundle-id": "skelektron",
-    "app-category-type": "public.app-category.business",
-    "osx": {
-      "title": "SkelEktron",
-      "icon-size": 120,
+    "appId": "com.bzcoding.skelektron",
+    "productName": "SkelEktron",
+    "dmg": {
+      "iconSize": 120,
+      "iconTextSize": 14,
       "contents": [
         {
           "x": 478,
@@ -88,8 +78,13 @@
         }
       ]
     },
+    "mac": {
+      "category": "public.app-category.business"
+    },
+    "linux": {
+      "category": "Development"
+    },
     "win": {
-      "msi": false
     }
   },
   "devDependencies": {
@@ -97,7 +92,7 @@
     "chai": "^3",
     "chai-as-promised": "^6",
     "dependency-check": "^2",
-    "electron-builder": "^3",
+    "electron-builder": "^7",
     "electron-prebuilt": "^1",
     "istanbul": "^0.4",
     "mocha": "^3",
