@@ -104,6 +104,8 @@ For Windows builds I use an official [Windows 10 development VM][win10dev] from 
 
 Sometimes I need a 32bit Windows 7 box, in those cases I use a [basic VM][win7dev] with [MS Visual C++ 2010 Redistributable Package (x86)][msvcpp] (when I don't need compile power) or the full [Visual Studio][vs2015], along with Node, Python and Git.
 
+**Note**: the `author.name` field from `app/package.json` is used by Squirrel as a path component for the shortcut menu icon, so double-check it for any special characters not allowed in Windows paths.
+
 I often build `.deb` packages from OS X, with `fpm` and GraphicsMagick (`brew install GraphicsMagick`) installed. Please check [fpm repo][fpm] for installation instructions.
 
 Also Linux build may fail if GraphicsMagick does not find suitable sizes inside the app Icon. Required sizes are: 16x16x32, 32x32x32, 256x256x32, 512x512x32, 1024x1024x32.
