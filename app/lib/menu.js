@@ -1,8 +1,70 @@
 'use strict'
 
 const isDev = (require('electron-is-dev') || global.appSettings.debug)
-const { app } = require('electron')
+const { app, BrowserWindow } = require('electron')
 const ipc = require('electron').ipcMain
+
+function sendAction (action) {
+  const win = BrowserWindow.getFocusedWindow()
+  if (process.platform === 'darwin') {
+    win.restore()
+  }
+  win.webContents.send(action)
+}
+
+const viewSubmenu = [
+  {
+    label: 'Back',
+    accelerator: 'CmdOrCtrl+B',
+    click: function (item, focusedWindow) {
+      if (focusedWindow) {
+        focusedWindow.webContents.goBack()
+      }
+    }
+  },
+  {
+    label: 'Reload',
+    accelerator: 'CmdOrCtrl+R',
+    click: function (item, focusedWindow) {
+      if (focusedWindow) {
+        focusedWindow.reload()
+      }
+    }
+  },
+  {
+    type: 'separator'
+  },
+  {
+    role: 'togglefullscreen'
+  },
+  {
+    label: 'Increase Text Size',
+    id: 'zoom-in',
+    accelerator: 'CmdOrCtrl+Plus',
+    enabled: false,
+    click () {
+      sendAction('zoom-in')
+    }
+  },
+  {
+    label: 'Decrease Text Size',
+    id: 'zoom-out',
+    accelerator: 'CmdOrCtrl+-',
+    enabled: false,
+    click () {
+      sendAction('zoom-out')
+    }
+  },
+  {
+    label: 'Reset Text Size',
+    id: 'zoom-actual',
+    accelerator: 'CmdOrCtrl+0',
+    enabled: false,
+    click () {
+      sendAction('zoom-actual')
+    }
+  }
+]
 
 var menuTemplate = [
   {
@@ -33,29 +95,8 @@ var menuTemplate = [
   },
   {
     label: 'View',
-    submenu: [
-      {
-        label: 'Back',
-        accelerator: 'CmdOrCtrl+B',
-        click: function (item, focusedWindow) {
-          if (focusedWindow) {
-            focusedWindow.webContents.goBack()
-          }
-        }
-      },
-      {
-        label: 'Reload',
-        accelerator: 'CmdOrCtrl+R',
-        click: function (item, focusedWindow) {
-          if (focusedWindow) {
-            focusedWindow.reload()
-          }
-        }
-      },
-      {
-        role: 'togglefullscreen'
-      }
-    ]
+    id: 'view',
+    submenu: viewSubmenu
   },
   {
     label: 'Window',
@@ -85,6 +126,9 @@ var menuTemplate = [
 
 // Show Dev Tools menu if running in development
 if (isDev) {
+  menuTemplate[1].submenu.push({
+    type: 'separator'
+  })
   menuTemplate[1].submenu.push(
     {
       label: 'Toggle Developer Tools',
