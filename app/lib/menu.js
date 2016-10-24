@@ -12,7 +12,32 @@ function sendAction (action) {
   win.webContents.send(action)
 }
 
-const viewSubmenu = [
+const editSubmenu = [
+  {
+    role: 'undo'
+  },
+  {
+    role: 'redo'
+  },
+  {
+    type: 'separator'
+  },
+  {
+    role: 'cut'
+  },
+  {
+    role: 'copy'
+  },
+  {
+    role: 'paste'
+  },
+  {
+    role: 'selectall'
+  }
+]
+
+// Need to be edited with Dev Tools items
+var viewSubmenu = [
   {
     label: 'Back',
     accelerator: 'CmdOrCtrl+B',
@@ -66,86 +91,18 @@ const viewSubmenu = [
   }
 ]
 
-var menuTemplate = [
+const helpSubmenu = [
   {
-    label: 'Edit',
-    submenu: [
-      {
-        role: 'undo'
-      },
-      {
-        role: 'redo'
-      },
-      {
-        type: 'separator'
-      },
-      {
-        role: 'cut'
-      },
-      {
-        role: 'copy'
-      },
-      {
-        role: 'paste'
-      },
-      {
-        role: 'selectall'
-      }
-    ]
-  },
-  {
-    label: 'View',
-    id: 'view',
-    submenu: viewSubmenu
-  },
-  {
-    label: 'Window',
-    role: 'window',
-    submenu: [
-      {
-        role: 'minimize'
-      },
-      {
-        role: 'close'
-      }
-    ]
-  },
-  {
-    label: 'Help',
-    role: 'help',
-    submenu: [
-      {
-        label: 'Info',
-        click: () => {
-          ipc.emit('open-info-window')
-        }
-      }
-    ]
+    label: 'Info',
+    click: () => {
+      ipc.emit('open-info-window')
+    }
   }
 ]
 
-// Show Dev Tools menu if running in development
-if (isDev) {
-  menuTemplate[1].submenu.push({
-    type: 'separator'
-  })
-  menuTemplate[1].submenu.push(
-    {
-      label: 'Toggle Developer Tools',
-      accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
-      click: function (item, focusedWindow) {
-        if (focusedWindow) {
-          focusedWindow.webContents.toggleDevTools()
-        }
-      }
-    }
-  )
-}
-
-if (process.platform === 'darwin') {
-  var name = app.getName()
-  menuTemplate.unshift({
-    label: name,
+const darwinTemplate = [
+  {
+    label: app.getName(),
     submenu: [
       {
         role: 'about'
@@ -176,16 +133,81 @@ if (process.platform === 'darwin') {
         role: 'quit'
       }
     ]
+  },
+  {
+    label: 'Edit',
+    submenu: editSubmenu
+  },
+  {
+    label: 'View',
+    id: 'view',
+    submenu: viewSubmenu
+  },
+  {
+    label: 'Window',
+    role: 'window',
+    submenu: [
+      {
+        role: 'minimize'
+      },
+      {
+        role: 'close'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        role: 'front'
+      }
+    ]
+  },
+  {
+    label: 'Help',
+    role: 'help',
+    submenu: helpSubmenu
+  }
+]
+
+const otherTemplate = [
+  {
+    label: 'File',
+    submenu: [
+      {
+        role: 'quit'
+      }
+    ]
+  },
+  {
+    label: 'Edit',
+    submenu: editSubmenu
+  },
+  {
+    label: 'View',
+    submenu: viewSubmenu
+  },
+  {
+    label: 'Help',
+    role: 'help',
+    submenu: helpSubmenu
+  }
+]
+
+// Show Dev Tools menu if running in development
+if (isDev) {
+  viewSubmenu.push({
+    type: 'separator'
   })
-  // Window menu.
-  menuTemplate[3].submenu.push(
+  viewSubmenu.push(
     {
-      type: 'separator'
-    },
-    {
-      role: 'front'
+      label: 'Toggle Developer Tools',
+      accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
+      click: function (item, focusedWindow) {
+        if (focusedWindow) {
+          focusedWindow.webContents.toggleDevTools()
+        }
+      }
     }
   )
 }
 
-module.exports = menuTemplate
+module.exports = process.platform === 'darwin' ? darwinTemplate : otherTemplate
