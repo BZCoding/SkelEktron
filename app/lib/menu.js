@@ -183,6 +183,7 @@ const otherTemplate = [
   },
   {
     label: 'View',
+    id: 'view',
     submenu: viewSubmenu
   },
   {
