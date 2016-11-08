@@ -8,6 +8,7 @@ const ipc = require('electron').ipcMain
 const path = require('path')
 const pjson = require('./package.json')
 const _ = require('lodash')
+const windowStateKeeper = require('electron-window-state')
 
 // Use system log facility, should work on Windows too
 require('./lib/log')(pjson.productName || 'SkelEktron')
@@ -67,9 +68,17 @@ function initialize () {
   }
 
   function createMainWindow () {
+    // Load the previous window state with fallback to defaults
+    let mainWindowState = windowStateKeeper({
+      defaultWidth: 1024,
+      defaultHeight: 768
+    })
+
     const win = new electron.BrowserWindow({
-      'width': 1024,
-      'height': 768,
+      'width': mainWindowState.width,
+      'height': mainWindowState.height,
+      'x': mainWindowState.x,
+      'y': mainWindowState.y,
       'title': app.getName(),
       'icon': path.join(__dirname, '/app/assets/img/icon.png'),
       'show': false, // Hide your application until your page has loaded
@@ -78,6 +87,11 @@ function initialize () {
         'preload': path.resolve(path.join(__dirname, 'preload.js'))
       }
     })
+
+    // Let us register listeners on the window, so we can update the state
+    // automatically (the listeners will be removed when the window is closed)
+    // and restore the maximized or full screen state
+    mainWindowState.manage(win)
 
     // Remove file:// if you need to load http URLs
     win.loadURL(`file://${__dirname}/${pjson.config.url}`, {})
