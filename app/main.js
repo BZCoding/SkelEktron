@@ -72,6 +72,7 @@ function initialize () {
       'height': 768,
       'title': app.getName(),
       'icon': path.join(__dirname, '/app/assets/img/icon.png'),
+      'show': false, // Hide your application until your page has loaded
       'webPreferences': {
         'nodeIntegration': pjson.config.nodeIntegration || true, // Disabling node integration allows to use libraries such as jQuery/React, etc
         'preload': path.resolve(path.join(__dirname, 'preload.js'))
@@ -82,6 +83,13 @@ function initialize () {
     win.loadURL(`file://${__dirname}/${pjson.config.url}`, {})
 
     win.on('closed', onClosed)
+
+    // Then, when everything is loaded, show the window and focus it so it pops up for the user
+    // Yon can also use: win.webContents.on('did-finish-load')
+    win.on('ready-to-show', () => {
+      win.show()
+      win.focus()
+    })
 
     win.on('unresponsive', function () {
       // In the real world you should display a box and do something
