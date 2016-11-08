@@ -250,7 +250,7 @@ See CONTRIBUTING file.
 
 ## Credits
 
-The [Electron](http://electron.atom.io) and [Electron Builder][electron-builder] team. [Arek Sredzki](http://arek.io/) for [Electron Release Server][ers], Ion for [printer][printer]. [Marco Piraccini](https://github.com/marcopiraccini) and [Bogdan Rotund](https://github.com/Bogdan-Rotund).
+The [Electron](http://electron.atom.io) and [Electron Builder][electron-builder] team. [Arek Sredzki](http://arek.io/) for [Electron Release Server][ers], Ion for [printer][printer]. [Marco Piraccini](https://github.com/marcopiraccini) and [Bogdan Rotund](https://github.com/Bogdan-Rotund). [Kilian Valkhof][kilian-valkhof] for these UI [pro tips][kilian-tips].
 
 ## Contributor Code of Conduct
 
@@ -288,3 +288,5 @@ SkelEktron is released under the MIT License. See the bundled LICENSE file for d
 [sails-session]: http://sailsjs.org/documentation/reference/configuration/sails-config-session
 [jawsdb]: https://elements.heroku.com/addons/jawsdb
 [heroku-redis]: https://elements.heroku.com/addons/heroku-redis
+[kilian-valkhof]: https://blog.avocode.com/authors/kilian-valkhof
+[kilian-tips]: https://blog.avocode.com/blog/4-must-know-tips-for-building-cross-platform-electron-apps
