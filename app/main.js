@@ -71,6 +71,7 @@ function initialize () {
       'width': 1024,
       'height': 768,
       'title': app.getName(),
+      'icon': path.join(__dirname, '/app/assets/img/icon.png'),
       'webPreferences': {
         'nodeIntegration': pjson.config.nodeIntegration || true, // Disabling node integration allows to use libraries such as jQuery/React, etc
         'preload': path.resolve(path.join(__dirname, 'preload.js'))
