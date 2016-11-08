@@ -9,3 +9,8 @@
 .printer-list-active {
     display: initial;
 }
+
+/* Make UI Text not selectable */
+.ui-text {
+    -webkit-user-select: none;
+}
