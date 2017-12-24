@@ -11,7 +11,7 @@
   },
   "license": "MIT",
   "main": "main.js",
-  "electronVersion": "1.0.0",
+  "electronVersion": "1.7.10",
   "dependencies": {
     "devtron": "^1",
     "electron-debug": "^1",

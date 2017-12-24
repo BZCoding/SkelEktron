@@ -5,7 +5,7 @@ First of all, **thank you** for contributing, **you are awesome**!
 
 Here are a few rules to follow in order to ease code reviews, and discussions before maintainers accept and merge your work.
 
-You MUST follow the [JavaScript Standard Style][https://www.npmjs.com/package/standard] conventions.
+You MUST follow the [JavaScript Standard Style](https://www.npmjs.com/package/standard) conventions.
 
 You MUST run the test suite.
 
