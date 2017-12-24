@@ -84,8 +84,7 @@
     "linux": {
       "category": "Development"
     },
-    "win": {
-    }
+    "win": {}
   },
   "devDependencies": {
     "async": "^2",
