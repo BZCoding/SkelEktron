@@ -17,7 +17,7 @@
     "electron-debug": "^1",
     "electron-is-dev": "^0.1",
     "electron-window-state": "^3",
-    "lodash": "^4"
+    "lodash": ">=4.17.5"
   },
   "config": {
     "url": "index.html",
