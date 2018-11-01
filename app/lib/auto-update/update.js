@@ -1,7 +1,6 @@
 'use strict'
 
 const os = require('os')
-const platform = os.platform() + '_' + os.arch()
 
 const { autoUpdater } = require('electron')
 
@@ -11,17 +10,17 @@ module.exports = function update (options) {
     return
   }
 
-  var updaterFeedUrl = options.url + platform + '/' + options.version
+  var updaterFeedUrl = options.url + os.platform() + '/' + options.version
   if (os.platform() === 'win32') {
     updaterFeedUrl += '/RELEASES'
   }
 
-  console.info('Running version %s on platform %s', options.version, platform)
+  console.info('Running version %s on platform %s', options.version, os.platform())
 
   try {
     // Don't try to update on development
-    if (!process.execPath.match(/[\\\/]electron-prebuilt/)) {
-      console.info('Checking for updates at %s', updaterFeedUrl)
+    if (!process.execPath.match(/electron-prebuilt/)) {
+      console.log('Checking for updates at %s', updaterFeedUrl)
       autoUpdater.setFeedURL(updaterFeedUrl)
       autoUpdater.checkForUpdates()
     }

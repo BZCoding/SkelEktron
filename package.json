@@ -1,7 +1,7 @@
 {
   "name": "SkelEktron",
   "description": "Unofficial Electron Template Application",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": {
     "name": "Vito Tardia / BZ Coding",
     "email": "vito@bzcoding.com",
@@ -84,22 +84,21 @@
     "linux": {
       "category": "Development"
     },
-    "win": {
-    }
+    "win": {}
   },
   "devDependencies": {
     "async": "^2",
     "chai": "^3",
     "chai-as-promised": "^6",
     "dependency-check": "^2",
-    "electron-builder": "^7",
-    "electron-prebuilt": "^1",
+    "electron": "^3.0.7",
+    "electron-builder": "^20.31.0",
     "istanbul": "^0.4",
-    "mocha": "^3",
+    "mocha": "^5.2.0",
     "pre-commit": "^1",
     "rimraf": "^2",
     "shelljs": "^0.7",
-    "spectron": "^3",
+    "spectron": "^5.0.0",
     "standard": "^8"
   }
 }

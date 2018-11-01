@@ -2,7 +2,7 @@
   "name": "SkelEktron",
   "productName": "SkelEktron",
   "description": "Electron Template Desktop Application",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "homepage": "https://github.com/BZCoding/SkelEktron",
   "author": {
     "name": "BZ Coding",
@@ -11,13 +11,13 @@
   },
   "license": "MIT",
   "main": "main.js",
-  "electronVersion": "1.0.0",
+  "electronVersion": "1.7.10",
   "dependencies": {
     "devtron": "^1",
     "electron-debug": "^1",
     "electron-is-dev": "^0.1",
     "electron-window-state": "^3",
-    "lodash": "^4"
+    "lodash": ">=4.17.5"
   },
   "config": {
     "url": "index.html",
